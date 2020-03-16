@@ -1,0 +1,21 @@
+{
+  "name": "portfolio-backend",
+  "version": "1.0.0",
+  "description": "Personal Portfolio",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev":"nodemon server/server.js"
+  },
+  "author": "Rodger Kumwanje",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "express": "^4.17.1",
+    "handlebars": "^4.7.3",
+    "mongoose": "^5.9.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.2"
+  }
+}
