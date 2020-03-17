@@ -4,9 +4,11 @@ const hbls = require('express-handlebars');
 const api = require('./api/routes/api');
 const mongoose = require('mongoose');
 const passport = require('passport');
-const initialize = require('./passport-config/passport');
+const session = require('express-session');
+const flash = require('express-flash');
+const uuid = require('uuid');
+const initializeUser = require('./passport-config/passport');
 const User = require('./api/routes/users');
-
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
@@ -17,27 +19,36 @@ app.set('view engine','handlebars');
 
 //Static folder
 app.use(express.static('public'));
-app.use(passport.initialize())
+
+// passport middlewares
+app.use(flash());
+app.use(session({
+    secret:uuid.v4(),
+    resave:false,
+    saveUninitialized:false    
+}));
+app.use(passport.initialize());
 app.use(passport.session());
-initialize(passport);
+initializeUser(passport);
+
 // database config
 mongoose.connect('mongodb://localhost/test',{ useNewUrlParser: true },()=> {
     console.log('connected to mongoDb');
 });
 
-// Static folder
-
 // temporary account creation
 app.use('/api/routes/user',User);
 app.use('/api/routes',api);
+
 // Error handlers
+// 404 error
 app.use((req,res,next) => {
-    res.status(404).send('Oops i think you are lost')
-})
+    res.status(404).send('Oops i think  you are lost');
+});
 
 // 500
 app.use((err,req,res,next) => {
-    res.status(500).send('internal server error')
+    res.status(500).send(`Internal Server Error ${err}`)
 });
 
 // PORT config
