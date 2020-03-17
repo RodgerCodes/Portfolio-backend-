@@ -12,15 +12,6 @@ const User = require('./api/routes/users');
 
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-
-// engine handlebars
-app.engine('handlebars', hbls({defaultLayout:'main'}));
-app.set('view engine','handlebars');
-
-//Static folder
-app.use(express.static('public'));
-
-// passport middlewares
 app.use(flash());
 app.use(session({
     secret:uuid.v4(),
@@ -30,6 +21,15 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 initializeUser(passport);
+// engine handlebars
+app.engine('handlebars', hbls({defaultLayout:'main'}));
+app.set('view engine','handlebars');
+
+//Static folder
+app.use(express.static('public'));
+
+// passport middlewares
+
 
 // database config
 mongoose.connect('mongodb://localhost/test',{ useNewUrlParser: true },()=> {

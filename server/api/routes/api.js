@@ -3,25 +3,25 @@ const router  = express.Router();
 const content = require('../model/content');
 const passport = require('passport');
 
-router.get('/', (req,res) => {
+router.get('/',checkNotauth,(req,res) => {
    res.render('login');
 });
 
 router.get('/dashboard',checkauth, (req,res) => {
-   res.render('dashboard');
+   res.render('dashboard',{layout:"landing"});
 })
 
 // login
 router.post('/login', checkNotauth,passport.authenticate('local', {
-   successRedirect:'/dashboard',
-   failureRedirect:'/',
+   successRedirect:'/api/routes/dashboard',
+   failureRedirect:'/api/routes',
    failureFlash:true
 }));
 
 // logout
 router.get('/logout', (req,res) => {
     req.logOut();
-    res.redirect('/');
+    res.redirect('/api/routes');
 });
 
 router.post('/dashboard',(req,res) => {
@@ -44,7 +44,7 @@ router.post('/dashboard',(req,res) => {
 
 function checkNotauth(req,res,next) {
    if(req.isAuthenticated()) {
-      return res.redirect('/');
+      return res.redirect('/api/routes/dashboard');
    }
 
    next();
@@ -55,7 +55,7 @@ function checkauth(req,res,next) {
        return next();
    }
 
-   res.redirect('/')
+   res.redirect('/api/routes')
 }
 
 
