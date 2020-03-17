@@ -5,11 +5,11 @@ const content = require('../model/content');
 
 router.get('/', (req,res) => {
    res.render('login');
-})
+});
 
 // login
 router.post('/login',(req,res) => {
-
+    res.render('dashboard',{layout:'landing'});
 });
 
 // logout

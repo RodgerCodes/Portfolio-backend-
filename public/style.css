@@ -1,0 +1,45 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+  background: url('./img/bg.jpg');
+}
+
+h1 {
+    font-size: 14;
+    text-align: center;
+}
+
+.parent {
+    position: relative;
+}
+
+.content {
+    position: absolute;
+    top: 8rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 280px;
+    background: #fff;
+    padding: 20px 20px;
+    box-shadow: 8px 9px 12px rgba(0, 0, 0, 0.725), -8px -9px 12px rgba(0, 0, 0, 0.725);
+}
+
+.content form {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+input[type="email"],input[type="password"] {
+    width: 350px;
+    height: 40px;
+}
