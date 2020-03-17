@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const user = require('../model/user');
 const bcrypt = require('bcryptjs');
+
 router.get('/',(req,res) => {
     res.send('This is the account creating page');
 });

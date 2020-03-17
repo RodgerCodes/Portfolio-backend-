@@ -9,12 +9,12 @@ router.get('/', (req,res) => {
 
 // login
 router.post('/login',(req,res) => {
-    res.render('dashboard',{layout:'landing'});
+   res.render('dashboard',{layout:'landing'})
 });
 
 // logout
 router.get('/logout', (req,res) => {
-
+    
 });
 
 router.post('/',(req,res) => {
