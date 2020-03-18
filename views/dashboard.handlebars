@@ -1,6 +1,6 @@
 <h2>welcome to the backed panel</h2>
     <div class="container card-body">
-       <form action="/dashboard" method="POST" class="form-group">
+       <form action="/api/routes/dashboard/data" method="POST" class="form-group">
            <label for="email">Email</label>
            <label for="number" class="number">Phone Number</label>
            <div class="form">
@@ -13,7 +13,9 @@
            </div>
            <button class="btn btn-primary btn-lg mt-lg-2 " type="submit">Submit</button>  
        </form>
-       <form action="/api/routes/logout" method="GET">
-         <button type="submit" class="btn btn-primary btn-lg">Logout</button>
+       <div>
+        <form action="/api/routes/logout" method="GET">
+            <button type="submit" class="btn btn-primary btn-lg">Logout</button>
         </form>
+       </div>
     </div>

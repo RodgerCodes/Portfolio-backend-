@@ -9,6 +9,26 @@ router.get('/',checkNotauth,(req,res) => {
 
 router.get('/dashboard',checkauth, (req,res) => {
    res.render('dashboard',{layout:"landing"});
+});
+
+router.post('/dashboard/data',(req,res) => {
+
+   const {email, pnumber, summary} = req.body;
+   const newInfo = new content({
+      email,
+      pnumber,
+      summary
+   });
+
+    newInfo.save()
+    .then(userinfo => {
+       res.redirect('/api/routes/dashboard/data');
+       res.send(userinfo);
+
+    })
+    .catch(err => {
+       console.log(err)
+    })
 })
 
 // login
@@ -24,22 +44,17 @@ router.get('/logout', (req,res) => {
     res.redirect('/api/routes');
 });
 
-router.post('/dashboard',(req,res) => {
-     const {email, pnumber, summary} = req.body;
-     const newInfo = new content({
-        email,
-        pnumber,
-        summary
-     })
 
-      newInfo.save()
-      .then(
-         res.send('Saved')
-      )
-      .catch(err => {
-         console.log(err)
-      })
-})
+
+router.get('/dashboard/data',(req,res) => {
+  content.find()
+  .then(info => {
+     res.status(200).send(info)
+  })
+  .catch(err => {
+     console.log(err);
+  })
+});
 
 
 function checkNotauth(req,res,next) {

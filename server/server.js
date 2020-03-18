@@ -21,15 +21,13 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 initializeUser(passport);
+
 // engine handlebars
 app.engine('handlebars', hbls({defaultLayout:'main'}));
 app.set('view engine','handlebars');
 
 //Static folder
 app.use(express.static('public'));
-
-// passport middlewares
-
 
 // database config
 mongoose.connect('mongodb://localhost/test',{ useNewUrlParser: true },()=> {
@@ -42,9 +40,9 @@ app.use('/api/routes',api);
 
 // Error handlers
 // 404 error
-app.use((req,res,next) => {
-    res.status(404).send('Oops i think  you are lost');
-});
+// app.use((req,res,next) => {
+//     res.status(404).send('Oops i think  you are lost');
+// });
 
 // 500
 app.use((err,req,res,next) => {
